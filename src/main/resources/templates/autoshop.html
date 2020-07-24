@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8"/>
+
+    <title>Application</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"></script>
+
+</head>
+
+<body>
+<div class="container">
+    <h1>AUTO SHOP</h1>
+
+    <table class="table table-hover ">
+        <thead class="thead-dark">
+        <tr>
+
+            <td>ID</td>
+            <td>TITLE</td>
+            <td>PRICE</td>
+            <td></td>
+            <td></td>
+        </tr>
+
+        <tbody>
+
+        <tr th:each="auo: ${auto_}">
+            <td th:text="${auo.id}"/>
+            <td th:text="${auo.model}"/>
+            <td th:text="${auo.price}"/>
+
+
+         <td><a class="btn btn-danger" th:href="@{'/auto'+ ${auo.id}}"/> Buy </a></td>
+
+
+        </tr>
+
+        </tbody>
+
+        </thead>
+
+    </table>
+
+
+</div>
+
+
+</body>
+
+
+</html>
