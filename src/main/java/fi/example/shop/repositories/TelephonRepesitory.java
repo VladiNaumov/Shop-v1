@@ -1,6 +1,7 @@
 package fi.example.shop.repositories;
 
 import fi.example.shop.entities.Car;
+import fi.example.shop.entities.Product;
 import fi.example.shop.entities.Telephon;
 import org.springframework.stereotype.Component;
 
@@ -8,10 +9,17 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
-// замена БД (где хранятся товары)
+//этот класс отвечает за работу с продуктами (удаление, добовление, и т.д.)
+// симуляция БД (где хранятся товары)
 
 @Component
 public class TelephonRepesitory {
+
+    private ProductRepository   productRepository;
+
+    public TelephonRepesitory(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     private List<Telephon> telefons;
 
@@ -30,7 +38,17 @@ public class TelephonRepesitory {
         telefons.add(new Telephon(4, "SONY", 650));
         telefons.add(new Telephon(5, "LG", 300));
 
+    }
 
+        public void getById(Long id) {
+        //поиска объекта
+        for (Telephon n : telefons) {
+            if (n.getId() == id) {
+                productRepository.products.add(new Product(n.getId(), n.getModel(), n.getPrice()));
+                return;
+
+            }
+        }
 
     }
 

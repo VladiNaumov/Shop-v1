@@ -16,6 +16,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
+//@Controller -> @Service -> @Repository
+
+//  Все задачи от WEB приложения, передаются классу помеченный аннотацием @Service
+
 @Controller
 public class MainController {
     //http://localhost:8189/app/index корень нашего приложения находится здесь
@@ -75,9 +79,16 @@ public class MainController {
        List<Car> allCar = autoService.getAllAuto();
         //отображение их на страничк "Autoshop"
        model.addAttribute("auto_", allCar);
-
         return "autoshop";
     }
+
+    @GetMapping("/auto/get/{id}")
+    public String ByCar(@PathVariable("id") Long id){
+        // удаление продукта по ID
+        autoService.getCarById(id);
+        return "redirect:/auto";
+    }
+
 
 
     @GetMapping("/puhelin")
@@ -89,4 +100,14 @@ public class MainController {
 
         return"puhelinshop";
     }
+
+    @GetMapping("/puhelin/get/{id}")
+    public String getPuh(@PathVariable("id") Long id){
+        // продукта по ID
+        telephonService.getById(id);
+        return "redirect:/puhelin";
+    }
+
+
+
 }

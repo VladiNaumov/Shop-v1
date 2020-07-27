@@ -7,14 +7,16 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+// Этот класс получает задание от класса помеченной аннотацией @Controller и передаёт задание классу помеченной аннотацией @Component
+
 @Service
-public class AutoService {
+public class AutoService  {
 
     private CarRepository carRepository;
 
 
-   @Autowired
-    public void setCarRepository(CarRepository carRepository) {
+    @Autowired
+    public AutoService(CarRepository carRepository) {
         this.carRepository = carRepository;
     }
 
@@ -22,5 +24,10 @@ public class AutoService {
         return carRepository.getCarList();
     }
 
+
+    public void getCarById(Long id){
+        carRepository.ById(id);
+
+    }
 
 }

@@ -1,8 +1,5 @@
 package fi.example.shop.repositories;
 
-
-//этот класс отвечает за работу с продуктами (удаление, добовление, и т.д.)
-
 import fi.example.shop.entities.Product;
 import org.springframework.stereotype.Component;
 
@@ -10,18 +7,20 @@ import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
-// замена БД (где хранятся товары)
+//этот класс отвечает за работу с продуктами (удаление, добовление, и т.д.)
+// симуляция БД (где хранятся товары)
 
 @Component
 public class ProductRepository {
 
-    private List<Product> products;
+    public List<Product> products;
 
     public List<Product> getProducts() {
         return products;
     }
 
-   @PostConstruct
+
+    @PostConstruct
     public void init() {
         products = new ArrayList<>();
         products.add(new Product(1L, "MILK", 3));
@@ -33,7 +32,7 @@ public class ProductRepository {
 
 
     public void deleteById(Long id) {
-        //поиска объекта и его удаление
+        //поиска объекта
         for (Product n : products ) {
             if (n.getId() == id) {
                 products.remove(n);

@@ -2,15 +2,25 @@ package fi.example.shop.repositories;
 
 
 import fi.example.shop.entities.Car;
+import fi.example.shop.entities.Product;
+import fi.example.shop.entities.Telephon;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.util.ArrayList;
 import java.util.List;
 
-// замена БД (где хранятся товары)
+//этот класс отвечает за работу с продуктами (удаление, добовление, и т.д.)
+// симуляция БД (где хранятся товары)
+
 @Component
 public class CarRepository {
+
+   private ProductRepository productRepository;
+
+    public CarRepository(ProductRepository productRepository) {
+        this.productRepository = productRepository;
+    }
 
     private List<Car> carList;
 
@@ -19,7 +29,7 @@ public class CarRepository {
     }
 
     @PostConstruct
-    public void InitAuto(){
+    public void InitAuto() {
 
         carList = new ArrayList<>();
 
@@ -34,4 +44,16 @@ public class CarRepository {
 
     }
 
+    public void ById(Long id) {
+        //поиска объекта
+        for (Car n : carList) {
+            if (n.getId() == id) {
+
+                productRepository.products.add(new Product(n.getId(), n.getModel(), n.getPrice()));
+                return;
+
+            }
+        }
+
+    }
 }
